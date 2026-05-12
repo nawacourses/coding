@@ -6,39 +6,9 @@
 <title>برنامج الترميز الطبي الأسترالي | نوا للتدريب الصحي</title>
 <meta name="description" content="KSA1 وKSA2 — معتمد من eHealth Education Australia ومجلس الضمان الصحي. خصم 25%.">
 
-<!-- LinkedIn Insight Tag -->
-<script type="text/javascript">
-_linkedin_partner_id = "10079345";
-window._linkedin_data_partner_ids = window._linkedin_data_partner_ids || [];
-window._linkedin_data_partner_ids.push(_linkedin_partner_id);
-</script>
-<script type="text/javascript">
-(function(l) {
-if (!l){window.lintrk = function(a,b){window.lintrk.q.push([a,b])};
-window.lintrk.q=[]}
-var s = document.getElementsByTagName("script")[0];
-var b = document.createElement("script");
-b.type = "text/javascript";b.async = true;
-b.src = "https://snap.licdn.com/li.lms-analytics/insight.min.js";
-s.parentNode.insertBefore(b, s);})(window.lintrk);
-</script>
-<noscript>
-<img height="1" width="1" style="display:none;" alt="" src="https://px.ads.linkedin.com/collect/?pid=10079345&fmt=gif" />
-</noscript>
-<!-- End LinkedIn Insight Tag -->
-
-<!-- Meta Pixel -->
-<script>
-!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
-n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}
-(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
-fbq('init','2267505010741435');
-fbq('track','PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=2267505010741435&ev=PageView&noscript=1"/></noscript>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-TLKJMSDW');</script>
+<!-- End Google Tag Manager -->
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
@@ -336,6 +306,10 @@ footer strong{color:rgba(255,255,255,.75)}
 </style>
 </head>
 <body>
+
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TLKJMSDW" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
 
 <!-- NAV -->
 <nav class="nav">
@@ -641,6 +615,8 @@ footer strong{color:rgba(255,255,255,.75)}
 <script>
 var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzf6bOjEsNC3-1lPAfFnb_joFxxaQtMcz0NFIIWIWnUqoaOdmSdGTwR6YHq8aBY8Ixt/exec';
 
+function getUTM(param){var u=new URLSearchParams(window.location.search);return u.get(param)||'';}
+
 function doSubmit() {
   var name  = document.getElementById('fn').value.trim();
   var phone = document.getElementById('fp').value.trim();
@@ -656,14 +632,18 @@ function doSubmit() {
     method:'POST',mode:'no-cors',
     headers:{'Content-Type':'application/json'},
     body:JSON.stringify({
-      timestamp:new Date().toLocaleString('ar-SA',{timeZone:'Asia/Riyadh'}),
+      utm_source:   getUTM('utm_source')   || 'direct',
+      utm_medium:   getUTM('utm_medium')   || '',
+      utm_campaign: getUTM('utm_campaign') || '',
       name:name,phone:phone,job:job,message:msg,
-      source:document.referrer||'مباشر'
+      program:'Coding'
     })
   }).catch(function(){});
   if(typeof fbq!=='undefined'){fbq('track','Lead',{content_category:'Medical Coding',currency:'SAR'});}
   document.getElementById('formWrap').style.display='none';
   document.getElementById('formSuccess').style.display='block';
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({event:'form_success',course:'Coding'});
 }
 function toggleFaq(el){
   var item=el.parentNode;
