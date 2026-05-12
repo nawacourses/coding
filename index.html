@@ -389,6 +389,10 @@ footer strong{color:rgba(255,255,255,.75)}
             <input type="tel" id="fp" placeholder="05xxxxxxxx">
           </div>
           <div class="field">
+            <label for="fe">البريد الإلكتروني *</label>
+            <input type="email" id="fe" placeholder="example@email.com">
+          </div>
+          <div class="field">
             <label for="fj">الوظيفة *</label>
             <input type="text" id="fj" placeholder="مثال: مرمز طبي، طالب، ممرض...">
           </div>
@@ -622,8 +626,10 @@ function doSubmit() {
   var phone = document.getElementById('fp').value.trim();
   var job   = document.getElementById('fj').value.trim();
   var msg   = document.getElementById('fm').value.trim();
+  var email = document.getElementById('fe').value.trim();
   if (!name)  { alert('يرجى إدخال الاسم الكامل'); return; }
   if (!phone) { alert('يرجى إدخال رقم الجوال');   return; }
+  if (!email) { alert('يرجى إدخال البريد الإلكتروني'); return; }
   if (!job)   { alert('يرجى إدخال الوظيفة');       return; }
   var btn = document.getElementById('submitBtn');
   btn.disabled = true;
@@ -635,7 +641,7 @@ function doSubmit() {
       utm_source:   getUTM('utm_source')   || 'direct',
       utm_medium:   getUTM('utm_medium')   || '',
       utm_campaign: getUTM('utm_campaign') || '',
-      name:name,phone:phone,job:job,message:msg,
+      name:name,email:email,phone:phone,job:job,message:msg,
       program:'Coding'
     })
   }).catch(function(){});
