@@ -400,6 +400,14 @@ footer strong{color:rgba(255,255,255,.75)}
             <label for="fm">رسالتك</label>
             <textarea id="fm" placeholder="اكتب رسالتك أو استفسارك هنا..."></textarea>
           </div>
+          <div class="field">
+            <label for="fprog">البرنامج المطلوب *</label>
+            <select id="fprog" style="width:100%;border:1.5px solid rgba(107,63,160,.2);border-radius:10px;padding:10px 13px;font-size:13px;font-family:'Cairo',Arial,sans-serif;color:#1A1640;background:#fff;outline:none;transition:border-color .2s;direction:rtl;-webkit-appearance:none;">
+              <option value="">-- اختر البرنامج --</option>
+              <option value="KSA1">KSA1 — المستوى التمهيدي</option>
+              <option value="KSA2">KSA2 — المستوى المتقدم</option>
+            </select>
+          </div>
           <button class="form-submit-btn" id="submitBtn" onclick="doSubmit()">
             🚀 احجز مقعدي الآن
           </button>
@@ -627,10 +635,12 @@ function doSubmit() {
   var job   = document.getElementById('fj').value.trim();
   var msg   = document.getElementById('fm').value.trim();
   var email = document.getElementById('fe').value.trim();
+  var prog  = document.getElementById('fprog').value;
   if (!name)  { alert('يرجى إدخال الاسم الكامل'); return; }
   if (!phone) { alert('يرجى إدخال رقم الجوال');   return; }
   if (!email) { alert('يرجى إدخال البريد الإلكتروني'); return; }
   if (!job)   { alert('يرجى إدخال الوظيفة');       return; }
+  if (!prog)  { alert('يرجى اختيار البرنامج');      return; }
   var btn = document.getElementById('submitBtn');
   btn.disabled = true;
   btn.textContent = '⏳ جاري الإرسال...';
@@ -643,7 +653,7 @@ function doSubmit() {
       utm_campaign: getUTM('utm_campaign') || '',
       utm_content:  getUTM('utm_content')  || '',
       name:name,email:email,phone:phone,job:job,message:msg,
-      program:'Coding'
+      program: prog || 'Coding'
     })
   }).catch(function(){});
   if(typeof fbq!=='undefined'){fbq('track','Lead',{content_category:'Medical Coding',currency:'SAR'});}
