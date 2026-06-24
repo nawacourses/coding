@@ -641,6 +641,12 @@ function doSubmit() {
   if (!email) { alert('يرجى إدخال البريد الإلكتروني'); return; }
   if (!job)   { alert('يرجى إدخال الوظيفة');       return; }
   if (!prog)  { alert('يرجى اختيار البرنامج');      return; }
+
+  /* ── قيمة تقديرية لليد (لتحسين Smart Bidding على القيمة) ──
+     عدّلي الأرقام حسب قيمة الليد الفعلية لديك (مثلاً متوسط قيمة التسجيل × نسبة الإغلاق). */
+  var LEAD_VALUES = { 'KSA1': 100, 'KSA2': 150 };
+  var leadValue = LEAD_VALUES[prog] || 100;
+
   var btn = document.getElementById('submitBtn');
   btn.disabled = true;
   btn.textContent = '⏳ جاري الإرسال...';
@@ -656,11 +662,25 @@ function doSubmit() {
       program: prog || 'Coding'
     })
   }).catch(function(){});
-  if(typeof fbq!=='undefined'){fbq('track','Lead',{content_category:'Medical Coding',currency:'SAR'});}
+
+  /* ── Meta Pixel Lead (مع قيمة) ── */
+  if(typeof fbq!=='undefined'){fbq('track','Lead',{content_category:'Medical Coding',content_name:prog,value:leadValue,currency:'SAR'});}
+
   document.getElementById('formWrap').style.display='none';
   document.getElementById('formSuccess').style.display='block';
+
+  /* ── حدث نجاح الفورم لـ GTM / GA4 / Google Ads ──
+     استخدمي اسم الحدث "form_success" كـ Custom Event Trigger في GTM. */
   window.dataLayer = window.dataLayer || [];
-  window.dataLayer.push({event:'form_success',course:'Coding'});
+  window.dataLayer.push({
+    event: 'form_success',
+    course: 'Coding',
+    program: prog,                              // KSA1 / KSA2
+    lead_source: getUTM('utm_source') || 'direct',
+    lead_campaign: getUTM('utm_campaign') || '',
+    value: leadValue,
+    currency: 'SAR'
+  });
 }
 function toggleFaq(el){
   var item=el.parentNode;
